@@ -1,0 +1,119 @@
+﻿<Window x:Class="ADONetExam.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ADONetExam"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="525">
+    <Grid>
+        <TabControl Background="Beige">
+            <TabItem Header="Категории Вакансии">
+                <Grid Height="200" Width="400" HorizontalAlignment="Center" Margin="30" Background="Beige">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition ></ColumnDefinition>
+                        <ColumnDefinition ></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <ComboBox x:Name="CategorySave" Grid.Row="0" Grid.ColumnSpan="2" Margin="0 0 0 5" DisplayMemberPath="CatName"
+                              SelectionChanged="CategorySave_SelectionChanged"></ComboBox>
+                    <Button x:Name="Save" Grid.Row="1" Grid.Column="0" Click="Save_Click" Background="LightGreen" Width="100" Margin="0 0 0 5" >Сохранить</Button>
+                    <Button x:Name="Clear" Grid.Row="1" Grid.Column="1" Click="Clear_Click" Background="LightGreen" Width="100" Margin="0 0 0 5">Очистить</Button>
+                    <ListView Grid.Row="2" Grid.ColumnSpan="2" x:Name="LVVacancy2">
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <GridViewColumn Header="NameVacancy" DisplayMemberBinding="{Binding Path=NameVacancy}"></GridViewColumn>
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </TabItem>
+            <TabItem Header=" Поиск вакансии" MouseEnter="TabItem_MouseEnter"
+                    >
+                <WrapPanel HorizontalAlignment="Center">
+                    <Grid  HorizontalAlignment="Center" Background="Beige" Margin="0 30 0 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <ComboBox x:Name="CategorySearch" Grid.Row="0" Grid.ColumnSpan="2" Margin="0 0 0 5" DisplayMemberPath="CatName"  SelectionChanged="CategoryFind_SelectionChanged" ></ComboBox>
+                        <DatePicker x:Name="DateSearch" Grid.Row="1" Grid.ColumnSpan="2"></DatePicker>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Width="40" Foreground="Red" Margin="0 0 0 5">E-mail</TextBlock>
+                        <TextBox x:Name="Email" Grid.Row="2" Grid.Column="1" Width="150" Background="Beige" Margin="0 0 0 5"></TextBox>
+
+                        <TextBlock Grid.Row="3" Grid.ColumnSpan="2" Foreground="Red" Margin="0 0 0 5">Содержащая в описании фраза:</TextBlock>
+                        <TextBox x:Name="Fraza" Grid.Row="4" Grid.ColumnSpan="2" Background="Beige" Margin="0 0 0 5"></TextBox>
+
+                        <Button x:Name="Search" Grid.Row="5" Grid.ColumnSpan="2" Click="Find_Click" Background="LightGreen">Поиск</Button>
+
+
+                        <ListView Grid.Row="6" Grid.ColumnSpan="2" x:Name="LVVacancy">
+                            <ListView.View>
+                                <GridView>
+                                    <GridView.Columns>
+                                        <GridViewColumn Header="NameVacancy" DisplayMemberBinding="{Binding Path=NameVacancy}" ></GridViewColumn>
+                                        <GridViewColumn Header="URLVacancy" DisplayMemberBinding="{Binding Path=URLVacancy }" ></GridViewColumn>
+                                        <GridViewColumn Header="DescriptionVacancy" DisplayMemberBinding="{Binding Path=DescriptionVacancy }" ></GridViewColumn>
+                                        <GridViewColumn Header="DatePublicationVacancy" DisplayMemberBinding="{Binding Path=DatePublicationVacancy }" ></GridViewColumn>
+                                        <GridViewColumn Header="EmailAuthorVacancy" DisplayMemberBinding="{Binding Path=EmailAuthorVacancy }" ></GridViewColumn>
+                                    </GridView.Columns>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                    <!--<TabControl Grid.Row="6" Grid.ColumnSpan="2">
+                        <TabItem Header="Name"></TabItem>
+                        <TabItem Header="URL"></TabItem>
+                        <TabItem Header="Description"></TabItem>
+                        <TabItem Header="Publications Date"></TabItem>
+                        <TabItem Header="Author e-mail"></TabItem>
+                    </TabControl>-->
+                </WrapPanel>
+
+            </TabItem>
+            <TabItem Header="Настройки">
+                <TabControl Grid.Row="6" Grid.ColumnSpan="2">
+                    <TabItem Header="Статисчтическая информация">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="100"></RowDefinition>
+                            </Grid.RowDefinitions>
+                        <ListView x:Name="DBInfo" Grid.Row="0">
+                            <ListView.View>
+                                <GridView>
+                                    <GridView.Columns>
+                                        <GridViewColumn Header="NameVacancy" DisplayMemberBinding="{Binding Path=NameVacancy}" ></GridViewColumn>
+                                       
+                                    </GridView.Columns>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Button x:Name="DropTable" Height="20" Width="100" Click="DropTable_Click" Grid.Row="1">Drop Table</Button>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Настройка базы данных">
+                        
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
